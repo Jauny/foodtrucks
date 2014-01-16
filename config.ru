@@ -5,4 +5,4 @@ require 'httparty'
 Bundler.require
 
 require './app'
-run UberApp
+run App

@@ -1,6 +1,6 @@
 require 'bundler/setup'
 
-class UberApp < Sinatra::Base
+class App < Sinatra::Base
 
   get '/' do
     @trucks = HTTParty.get("http://data.sfgov.org/resource/rqzj-sfat.json")
