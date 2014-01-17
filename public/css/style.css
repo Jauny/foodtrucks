@@ -1,3 +1,18 @@
-h1 {
-  color: red;
+#app {
+  height: 100%;
+}
+
+#trucks {
+  border-right: 2px solid pink;
+}
+
+#map {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+#map-canvas {
+  height: 100%;
 }

@@ -1,19 +1,31 @@
-%h1 Hi, here are alllll the trucks!
+#app
+  .row
+    #trucks.col-xs-5
 
-%table.table.bordered.striped
-  %thead
-    %th Longitude
-    %th Latitude
-    %th Type
-    %th Name
-    %th Food
+    #map.col-xs-7
+      #map-canvas
 
-  %tbody
-    - @trucks.each do |truck|
-      - if truck
-        %tr
-          %td= truck["location"]["longitude"] if truck["location"]["longitude"]
-          %td= truck["location"]["latitude"] if truck["location"]["latitude"]
-          %td= truck["facilitytype"] if truck["facilitytype"]
-          %td= truck["applicant"] if truck["applicant"]
-          %td= truck["fooditems"] if truck["fooditems"]
+
+
+-# template for Truck
+%script#truck-item-template{type: 'text/template'}
+  %strong
+    <%= applicant %>
+
+/ %table.table.bordered.striped
+/   %thead
+/     %th Longitude
+/     %th Latitude
+/     %th Type
+/     %th Name
+/     %th Food
+
+/   %tbody
+/     - @trucks.each do |truck|
+/       - if truck
+/         %tr
+/           %td= truck["location"]["longitude"] if truck["location"]["longitude"]
+/           %td= truck["location"]["latitude"] if truck["location"]["latitude"]
+/           %td= truck["facilitytype"] if truck["facilitytype"]
+/           %td= truck["applicant"] if truck["applicant"]
+/           %td= truck["fooditems"] if truck["fooditems"]
