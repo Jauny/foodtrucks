@@ -8,7 +8,7 @@ class App < Sinatra::Base
 
   get '/trucks' do
     trucks = HTTParty.get("http://data.sfgov.org/resource/rqzj-sfat.json")
-    trucks.select! { |truck| !!truck["location"] && truck["status"] == "APPROVED" }
+    trucks.select! { |truck| !!truck["location"] && truck["status"] == "APPROVED" }.shuffle!
 
     trucks[0..29].to_json
   end

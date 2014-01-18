@@ -75,11 +75,13 @@ $(function () {
       });
 
       // marker's popup
-      infowindow = new google.maps.InfoWindow({
-          content: "COUCOU TU VEUX VOIR MA BITE?"
+      openedWindow = null; // global scope to close last opened
+      var infowindow = new google.maps.InfoWindow({
+          content: _this.model.attributes.applicant
       });
       google.maps.event.addListener(marker, 'click', function() {
-        if (infowindow) infowindow.close();
+        if (openedWindow) openedWindow.close();
+        openedWindow = infowindow;
         infowindow.open(_this.options.map, marker);
       });
     }
