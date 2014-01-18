@@ -58,15 +58,29 @@ $(function () {
   // Pin view
   App.Views.PinView = Backbone.View.extend({
     initialize: function(options) {
+      var _this = this;
+      _this.options = options;
 
-      this.options = options;
+      // set values for marker
+      var latLng = new google.maps.LatLng(_this.model.attributes.location.latitude, _this.model.attributes.location.longitude);
+      var icon = _this.model.attributes.facilitytype == 'Truck' ? 'images/truck2.png' : 'images/pushcart.png'
 
-      var latLng = new google.maps.LatLng(this.model.attributes.location.latitude, this.model.attributes.location.longitude);
-
+      // put marker on map
       var marker = new google.maps.Marker({
         position: latLng,
-        map: this.options.map,
-        title: "hi!"
+        map: _this.options.map,
+        animation: google.maps.Animation.DROP,
+        title: _this.model.attributes.applicant,
+        icon: icon
+      });
+
+      // marker's popup
+      infowindow = new google.maps.InfoWindow({
+          content: "COUCOU TU VEUX VOIR MA BITE?"
+      });
+      google.maps.event.addListener(marker, 'click', function() {
+        if (infowindow) infowindow.close();
+        infowindow.open(_this.options.map, marker);
       });
     }
   });

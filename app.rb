@@ -10,7 +10,7 @@ class App < Sinatra::Base
     trucks = HTTParty.get("http://data.sfgov.org/resource/rqzj-sfat.json")
     trucks.select! { |truck| !!truck["location"] && truck["status"] == "APPROVED" }
 
-    trucks.to_json
+    trucks[0..29].to_json
   end
 
 end
