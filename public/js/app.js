@@ -42,7 +42,6 @@ $(function () {
     },
 
     addOne: function(model) {
-
       var truckView = new App.Views.TruckView({ model: model });
 
       // append the new view to the DOM
@@ -51,9 +50,24 @@ $(function () {
 
     // renders the list
     render: function() {
-
       this.collection.forEach(this.addOne, this);
       return this;
+    }
+  });
+
+  // Pin view
+  App.Views.PinView = Backbone.View.extend({
+    initialize: function(options) {
+
+      this.options = options;
+
+      var latLng = new google.maps.LatLng(this.model.attributes.location.latitude, this.model.attributes.location.longitude);
+
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: this.options.map,
+        title: "hi!"
+      });
     }
   });
 
@@ -62,15 +76,29 @@ $(function () {
     el: $('#map-canvas'),
 
     initialize: function() {
+      // adds the event add to add an element to the collection
+      this.listenTo(this.collection, 'add', this.addOne);
+      this.listenTo(this.collection, 'reset', this.render);
+
       var mapOptions = {
         center: new google.maps.LatLng(37.7745948, -122.4127949),
         zoom: 13
       };
-      var map = new google.maps.Map(this.el,
+      this.map = new google.maps.Map(this.el,
           mapOptions);
     },
 
+    addOne: function(model) {
+      var pinView = new App.Views.PinView({
+        model: model,
+        map: this.map
+      });
+    },
 
+    render: function() {
+      this.collection.forEach(this.addOne, this);
+      return this;
+    }
   });
 
   // Global app element
