@@ -1,12 +1,15 @@
 #app
-  #trucks.col-xs-5
+  #trucks.list-group.col-xs-4
+    #search
+      %input(type="search" class="form-control" id="truck-search" placeholder="Search a Food Truck!")
 
-  #map.col-xs-7
+  #map.col-xs-8
     #map-canvas
 
 
 
 -# template for Truck
 %script#truck-item-template{type: 'text/template'}
-  .truck
-    <%= applicant %>
+  %h4
+    <img src="<%= this.model.icon() %>" class="pull-right" />
+    <%= this.model.attributes.applicant %>

@@ -9,10 +9,10 @@ class App < Sinatra::Base
 
   get '/trucks' do
     # get trucks from api
-    # trucks = HTTParty.get("http://data.sfgov.org/resource/fi3h-6q7h.json")
+    trucks = HTTParty.get("http://data.sfgov.org/resource/fi3h-6q7h.json")
 
     # get trucks from cached data
-    trucks = get_trucks
+    # trucks = get_trucks
 
     # some trucks have no location
     trucks.select! { |truck| !!truck["location"] }

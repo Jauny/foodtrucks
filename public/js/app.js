@@ -8,7 +8,15 @@ $(function () {
 
   // Truck Model
   App.Models.Truck = Backbone.Model.extend({
-    rootURL: '/trucks'
+    rootURL: '/trucks',
+
+    food: function() {
+      return this.attributes.fooditems.split(":");
+    },
+
+    icon: function() {
+      return this.attributes.facilitytype == 'Truck' ? 'images/truck2.png' : 'images/pushcart.png';
+    }
   });
 
   // Trucks Collection
@@ -20,8 +28,8 @@ $(function () {
 
   // Truck model view
   App.Views.TruckView = Backbone.View.extend({
-    tagName: 'div',
-    className: 'truck',
+    tagName: 'a',
+    className: 'truck list-group-item',
     template: _.template($('#truck-item-template').html()),
 
     events:{
@@ -34,7 +42,7 @@ $(function () {
     },
 
     render: function(){
-      this.$el.html(this.template(this.model.toJSON()));
+      this.$el.html(this.template(this.model));
       return this;
     }
 
@@ -75,7 +83,7 @@ $(function () {
         _this.options.latitude,
         _this.options.longitude
       );
-      var icon = _this.model.attributes.facilitytype == 'Truck' ? 'images/truck2.png' : 'images/pushcart.png'
+      var icon = _this.model.icon();
 
       // put marker on map
       this.marker = new google.maps.Marker({
@@ -176,4 +184,14 @@ $(function () {
 
   // initialize everything
   var app = new App.Views.App();
+
+
+
+  $('#truck-search').typeahead({
+    name: 'trucks',
+    remote: 'http://data.sfgov.org/resource/fi3h-6q7h.json',
+    limit: 10
+  });
+
 });
+

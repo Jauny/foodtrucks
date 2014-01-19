@@ -2,13 +2,45 @@
   height: 100%;
 }
 
+.twitter-typeahead {
+  width: 100%;
+}
+
+.twitter-typeahead .tt-dropdown-menu {
+  width: 100%;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 0;
+  height: 60px;
+  font-size: 2em;
+  padding: 10px 15px;
+  color: grey;
+}
+
+input.form-control#truck-search {
+  border-radius: 0;
+  height: 60px;
+  font-size: 2em;
+}
+
 #trucks {
   padding: 0;
 }
 
+.list-group-item:first-child {
+  border-radius: 0;
+}
+
+.list-group-item:last-child {
+  border-radius: 0;
+}
+
+.list-group {
+  padding: 0;
+  margin-bottom: 0;
+}
+
 .truck {
-  width: 100%;
-  border-bottom: 1px solid grey;
 }
 
 #map {

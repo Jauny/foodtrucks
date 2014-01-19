@@ -11,11 +11,12 @@
     = yield
 
 
-  %script{'src' => 'js/vendors/jquery.js'}
-  %script{'src' => 'js/vendors/underscore.js'}
-  %script{'src' => 'js/vendors/backbone.js'}
-  %script{'src' => 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBLOJwjMTFe6BcrByw34gwxVEcJeIzTYD0&sensor=true'}
-  %script{'src' => 'js/app.js'}
+  %script{type: 'text/javascript', src: 'js/vendors/jquery.js'}
+  %script{type: 'text/javascript', src: 'js/vendors/underscore.js'}
+  %script{type: 'text/javascript', src: 'js/vendors/backbone.js'}
+  %script{type: 'text/javascript', src: 'js/vendors/typeahead.min.js'}
+  %script{type: 'text/javascript', src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBLOJwjMTFe6BcrByw34gwxVEcJeIzTYD0&sensor=true'}
+  %script{type: 'text/javascript', src: 'js/app.js'}
 
   / :javascript
   /   $(function() {
