@@ -2,22 +2,11 @@
   height: 100%;
 }
 
-.twitter-typeahead {
-  width: 100%;
+.sidebar {
+  padding: 0;
 }
 
-.twitter-typeahead .tt-dropdown-menu {
-  width: 100%;
-  background-color: white;
-  border: 1px solid grey;
-  border-radius: 0;
-  height: 60px;
-  font-size: 2em;
-  padding: 10px 15px;
-  color: grey;
-}
-
-input.form-control#truck-search {
+#search input {
   border-radius: 0;
   height: 60px;
   font-size: 2em;

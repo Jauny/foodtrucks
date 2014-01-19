@@ -23,7 +23,19 @@ $(function () {
   App.Collections.Trucks = Backbone.Collection.extend({
     // holds truck model
     model: App.Models.Truck,
-    url: '/trucks'
+    url: '/trucks',
+
+    initialize: function() {
+      this.listenTo(this, 'filter', this.filter);
+    },
+
+    filter: function(query) {
+      var filteredTrucks = _.filter(this.models, function(truck) {
+        return truck.attributes.applicant.indexOf(query) !== -1;
+      });
+
+      this.reset(filteredTrucks);
+    }
   });
 
   // Truck model view
@@ -67,8 +79,24 @@ $(function () {
 
     // renders the list
     render: function() {
+      this.$el.html('');
       this.collection.forEach(this.addOne, this);
       return this;
+    }
+  });
+
+  // Search View
+  App.Views.SearchView = Backbone.View.extend({
+    el: '#search',
+
+    events: {
+      'keyup #truck-search': 'searchTrucks'
+    },
+
+    searchTrucks: function(e) {
+      query = $(e.currentTarget).val();
+
+      this.collection.trigger('filter', query);
     }
   });
 
@@ -166,11 +194,12 @@ $(function () {
 
     initialize: function() {
       this.trucks = new App.Collections.Trucks();
-
       this.trucksView = new App.Views.TrucksView({
         collection: this.trucks
       });
-
+      this.SearchView = new App.Views.SearchView({
+        collection: this.trucks
+      });
       this.mapView = new App.Views.MapView({
         collection: this.trucks
       });
@@ -183,15 +212,6 @@ $(function () {
   });
 
   // initialize everything
-  var app = new App.Views.App();
-
-
-
-  $('#truck-search').typeahead({
-    name: 'trucks',
-    remote: 'http://data.sfgov.org/resource/fi3h-6q7h.json',
-    limit: 10
-  });
-
+  window.app = new App.Views.App();
 });
 

@@ -14,19 +14,5 @@
   %script{type: 'text/javascript', src: 'js/vendors/jquery.js'}
   %script{type: 'text/javascript', src: 'js/vendors/underscore.js'}
   %script{type: 'text/javascript', src: 'js/vendors/backbone.js'}
-  %script{type: 'text/javascript', src: 'js/vendors/typeahead.min.js'}
   %script{type: 'text/javascript', src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBLOJwjMTFe6BcrByw34gwxVEcJeIzTYD0&sensor=true'}
   %script{type: 'text/javascript', src: 'js/app.js'}
-
-  / :javascript
-  /   $(function() {
-  /     function initialize() {
-  /       var mapOptions = {
-  /         center: new google.maps.LatLng(-34.397, 150.644),
-  /         zoom: 8
-  /       };
-  /       var map = new google.maps.Map(document.getElementById("map"),
-  /           mapOptions);
-  /     }
-  /     google.maps.event.addDomListener(window, 'load', initialize);
-  /   });
