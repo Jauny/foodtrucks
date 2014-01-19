@@ -24,6 +24,15 @@ $(function () {
     className: 'truck',
     template: _.template($('#truck-item-template').html()),
 
+    events:{
+      'click': 'showPins'
+    },
+
+    showPins: function(){
+      this.collection.trigger('closePins');
+      this.model.trigger('showPins');
+    },
+
     render: function(){
       this.$el.html(this.template(this.model.toJSON()));
       return this;
@@ -42,7 +51,7 @@ $(function () {
     },
 
     addOne: function(model) {
-      var truckView = new App.Views.TruckView({ model: model });
+      var truckView = new App.Views.TruckView({ model: model, collection: this.collection });
 
       // append the new view to the DOM
       this.$el.append(truckView.render().el);
@@ -62,11 +71,14 @@ $(function () {
       _this.options = options;
 
       // set values for marker
-      var latLng = new google.maps.LatLng(_this.model.attributes.location.latitude, _this.model.attributes.location.longitude);
+      var latLng = new google.maps.LatLng(
+        _this.options.latitude,
+        _this.options.longitude
+      );
       var icon = _this.model.attributes.facilitytype == 'Truck' ? 'images/truck2.png' : 'images/pushcart.png'
 
       // put marker on map
-      var marker = new google.maps.Marker({
+      this.marker = new google.maps.Marker({
         position: latLng,
         map: _this.options.map,
         animation: google.maps.Animation.DROP,
@@ -75,16 +87,21 @@ $(function () {
       });
 
       // marker's popup
-      openedWindow = null; // global scope to close last opened
-      var infowindow = new google.maps.InfoWindow({
+      this.infowindow = new google.maps.InfoWindow({
           content: _this.model.attributes.applicant
       });
-      google.maps.event.addListener(marker, 'click', function() {
-        if (openedWindow) openedWindow.close();
-        openedWindow = infowindow;
-        infowindow.open(_this.options.map, marker);
+      google.maps.event.addListener(this.marker, 'click', function() {
+        _this.collection.trigger('closePins');
+        _this.model.trigger('showPins');
       });
+
+      this.listenTo(this.model, 'showPins', this.showPin);
+    },
+
+    showPin: function() {
+      this.infowindow.open(this.options.map, this.marker);
     }
+
   });
 
   // Map view
@@ -95,6 +112,7 @@ $(function () {
       // adds the event add to add an element to the collection
       this.listenTo(this.collection, 'add', this.addOne);
       this.listenTo(this.collection, 'reset', this.render);
+      this.listenTo(this.collection, 'closePins', this.closePins);
 
       var mapOptions = {
         center: new google.maps.LatLng(37.7745948, -122.4127949),
@@ -102,18 +120,35 @@ $(function () {
       };
       this.map = new google.maps.Map(this.el,
           mapOptions);
+
+      this.pinViews = [];
     },
 
     addOne: function(model) {
-      var pinView = new App.Views.PinView({
-        model: model,
-        map: this.map
+      var _this = this;
+
+      _.each(model.attributes.location, function(location) {
+        _this.pinViews.push(
+          new App.Views.PinView({
+            model: model,
+            collection: _this.collection,
+            longitude: location.longitude,
+            latitude: location.latitude,
+            map: _this.map
+          })
+        )
       });
     },
 
     render: function() {
       this.collection.forEach(this.addOne, this);
       return this;
+    },
+
+    closePins: function() {
+      _.each(this.pinViews, function(pin) {
+        pin.infowindow.close();
+      });
     }
   });
 

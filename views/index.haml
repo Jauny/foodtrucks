@@ -1,31 +1,12 @@
 #app
-  .row
-    #trucks.col-xs-5
+  #trucks.col-xs-5
 
-    #map.col-xs-7
-      #map-canvas
+  #map.col-xs-7
+    #map-canvas
 
 
 
 -# template for Truck
 %script#truck-item-template{type: 'text/template'}
-  %strong
+  .truck
     <%= applicant %>
-
-/ %table.table.bordered.striped
-/   %thead
-/     %th Longitude
-/     %th Latitude
-/     %th Type
-/     %th Name
-/     %th Food
-
-/   %tbody
-/     - @trucks.each do |truck|
-/       - if truck
-/         %tr
-/           %td= truck["location"]["longitude"] if truck["location"]["longitude"]
-/           %td= truck["location"]["latitude"] if truck["location"]["latitude"]
-/           %td= truck["facilitytype"] if truck["facilitytype"]
-/           %td= truck["applicant"] if truck["applicant"]
-/           %td= truck["fooditems"] if truck["fooditems"]

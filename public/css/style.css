@@ -3,7 +3,12 @@
 }
 
 #trucks {
-  border-right: 2px solid pink;
+  padding: 0;
+}
+
+.truck {
+  width: 100%;
+  border-bottom: 1px solid grey;
 }
 
 #map {
@@ -11,6 +16,7 @@
   right: 0;
   bottom: 0;
   top: 0;
+  padding: 0;
 }
 
 #map-canvas {
