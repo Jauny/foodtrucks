@@ -25,16 +25,12 @@ $(function () {
     model: App.Models.Truck,
     url: '/trucks',
 
-    initialize: function() {
-      this.listenTo(this, 'filter', this.filter);
-    },
-
     filter: function(query) {
       var filteredTrucks = _.filter(this.models, function(truck) {
-        return truck.attributes.applicant.indexOf(query) !== -1;
+        return truck.attributes.applicant.toLowerCase().indexOf(query.toLowerCase()) !== -1;
       });
 
-      this.reset(filteredTrucks);
+      return new App.Collections.Trucks(filteredTrucks);
     }
   });
 
@@ -53,7 +49,7 @@ $(function () {
       this.model.trigger('showPins');
     },
 
-    render: function(){
+    render: function(query){
       this.$el.html(this.template(this.model));
       return this;
     }
@@ -68,6 +64,7 @@ $(function () {
       // adds the event add to add an element to the collection
       this.listenTo(this.collection, 'add', this.addOne);
       this.listenTo(this.collection, 'reset', this.render);
+      this.listenTo(this.collection, 'filter', this.renderFiltered);
     },
 
     addOne: function(model) {
@@ -81,6 +78,13 @@ $(function () {
     render: function() {
       this.$el.html('');
       this.collection.forEach(this.addOne, this);
+      return this;
+    },
+
+    // renders the filtered list
+    renderFiltered: function(query) {
+      this.$el.html('');
+      this.collection.filter(query).forEach(this.addOne, this);
       return this;
     }
   });
