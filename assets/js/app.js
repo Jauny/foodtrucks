@@ -15,7 +15,7 @@ $(function () {
     },
 
     icon: function() {
-      return this.attributes.facilitytype == 'Truck' ? 'images/truck2.png' : 'images/pushcart.png';
+      return this.attributes.facilitytype == 'Truck' ? 'assets/truck2.png' : 'assets/pushcart.png';
     }
   });
 

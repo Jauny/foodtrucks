@@ -1,8 +1,13 @@
 require 'rubygems'
 require 'bundler'
 require 'httparty'
+require 'sprockets'
+require './app'
 
 Bundler.require
 
-require './app'
+map '/assets' do
+  run App.assets
+end
+
 run App
