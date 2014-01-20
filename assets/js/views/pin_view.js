@@ -15,7 +15,6 @@ PinView = Backbone.View.extend({
     this.marker = new google.maps.Marker({
       position: latLng,
       map: _this.options.map,
-      animation: google.maps.Animation.DROP,
       title: _this.model.attributes.applicant,
       icon: icon
     });
