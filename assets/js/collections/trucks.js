@@ -6,7 +6,9 @@ Trucks = Backbone.Collection.extend({
 
   filter: function(query) {
     var filteredTrucks = _.filter(this.models, function(truck) {
-      return truck.attributes.applicant.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      return (truck.attributes.applicant.toLowerCase().indexOf(query.toLowerCase()) !== -1) ||
+             (truck.attributes.fooditems.toLowerCase().indexOf(query.toLowerCase()) !== -1) ||
+             (truck.attributes.facilitytype.toLowerCase().indexOf(query.toLowerCase()) !== -1);
     });
 
     return new Trucks(filteredTrucks);
