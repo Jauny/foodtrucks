@@ -52,3 +52,13 @@
 #map-canvas {
   height: 100%;
 }
+
+@media (max-width: 768px) {
+  #map {
+    height: 400px;
+  }
+
+  #trucks-list {
+    margin-top: 400px;
+  }
+}
