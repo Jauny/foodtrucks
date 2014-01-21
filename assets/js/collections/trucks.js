@@ -1,6 +1,5 @@
 // Trucks Collection
 Trucks = Backbone.Collection.extend({
-  // holds truck model
   model: Truck,
   url: '/trucks',
 
@@ -12,34 +11,43 @@ Trucks = Backbone.Collection.extend({
 
   initialize: function() {
     this.listenTo(this, 'filter', this.filter);
-    this.listenTo(this, 'closeByTrucks', this.closeByTrucks);
   },
 
   // filters the collection when user does a search
   filter: function(query) {
-    var filteredTrucks = _.filter(this.models, function(truck) {
-      return (truck.attributes.applicant.toLowerCase().indexOf(query.toLowerCase()) !== -1) ||
-             (truck.attributes.fooditems.toLowerCase().indexOf(query.toLowerCase()) !== -1) ||
-             (truck.attributes.facilitytype.toLowerCase().indexOf(query.toLowerCase()) !== -1);
-    });
+    query = query.trim().toLowerCase();
+
+    this.filteredTrucks = this;
+
+    if(query && query.length) {
+      this.filterByQuery(query);
+    }
 
     // checks if we have user's geolocations and filters
     if (this.userPosition) {
-      filteredTrucks = this.closeByTrucks(filteredTrucks);
+      this.closeByTrucks();
     }
 
-    this.filteredTrucks = new Trucks(filteredTrucks);
     this.trigger('filtered');
   },
 
+  filterByQuery: function(query) {
+    var trucks = _.filter(this.filteredTrucks.models, function(truck) {
+      return (truck.attributes.applicant.toLowerCase().indexOf(query) !== -1) ||
+             (truck.attributes.fooditems.toLowerCase().indexOf(query) !== -1) ||
+             (truck.attributes.facilitytype.toLowerCase().indexOf(query) !== -1);
+    });
+
+    this.filteredTrucks = new Trucks(trucks);
+  },
+
   // filters the list for trucks around
-  closeByTrucks: function(filteredTrucks) {
+  closeByTrucks: function() {
     var lat  = this.userPosition.coords.latitude,
-        long = this.userPosition.coords.longitude;
+        long = this.userPosition.coords.longitude,
+        closeByTrucks = [];
 
-    var closeByTrucks = [];
-
-    _.each(filteredTrucks, function(truck) {
+    _.each(this.filteredTrucks.models, function(truck) {
       var locs = [];
 
       _.each(truck.attributes.location, function(loc) {
@@ -59,6 +67,6 @@ Trucks = Backbone.Collection.extend({
       }
     });
 
-    return closeByTrucks;
+    this.filteredTrucks = new Trucks(closeByTrucks);
   }
 });

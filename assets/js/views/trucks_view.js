@@ -7,7 +7,6 @@ TrucksView = Backbone.View.extend({
     this.listenTo(this.collection, 'add', this.addOne);
     this.listenTo(this.collection, 'reset', this.render);
     this.listenTo(this.collection, 'filtered', this.renderFiltered);
-    this.listenTo(this.collection, 'renderCloseByTrucks', this.renderCloseByTrucks);
   },
 
   addOne: function(model) {

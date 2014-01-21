@@ -20,16 +20,19 @@ $(function () {
       this.mapView = new MapView({
         collection: this.trucks
       });
+    },
 
+    start: function() {
       // gets the trucks from /trucks
       this.trucks.fetch({
         reset: true
       });
-
     }
+
   });
 
   // initialize everything
   window.app = new App();
+  window.app.start();
 });
 

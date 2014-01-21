@@ -8,7 +8,6 @@ MapView = Backbone.View.extend({
     this.listenTo(this.collection, 'reset', this.render);
     this.listenTo(this.collection, 'closePins', this.closePins);
     this.listenTo(this.collection, 'filtered', this.renderFiltered);
-    this.listenTo(this.collection, 'renderCloseByTrucks', this.renderCloseByTrucks);
 
     var mapOptions = {
       center: new google.maps.LatLng(37.7745948, -122.4127949),
