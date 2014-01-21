@@ -1,5 +1,4 @@
 # SF Food trucks map
-
 http://eatlikeadiplomat.herokuapp.com/
 
 By [Jonathan Pepin](http://www.jypepin.com/) - [LinkedIn](http://linkedin.com/in/jypepin)
@@ -17,3 +16,10 @@ Therefore, Sinatra seems to be a correct choice for it. Easy, simple, light, it'
 
 ### Front End
 Learnt Backbone through the development of this app. Seemed to be a good front-end framework to allow a responsive and dynamic single page app, with trucks list and the map sharing the same models/collections.
+
+### To do
+* loading screen
+* geolocalisation is too slow
+* search trucks around specific address/location
+* filter data based on map position
+* save trucks to favorites
