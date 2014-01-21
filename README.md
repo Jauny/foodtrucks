@@ -2,7 +2,7 @@
 
 http://eatlikeadiplomat.herokuapp.com/
 
-By [Jonathan Pepin](http://www.jypepin.com/)
+By [Jonathan Pepin](http://www.jypepin.com/) - [LinkedIn](http://linkedin.com/in/jypepin)
 
 ### Stack
 * Sinatra with Sprockets for Asset Pipeline
