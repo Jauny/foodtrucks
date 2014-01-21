@@ -27,7 +27,6 @@ SearchView = Backbone.View.extend({
 
       navigator.geolocation.getCurrentPosition(
         function(position) {
-          _this.toggleGeoLoading();
           _this.collection.userPosition = position;
           _this.searchTrucks();
       }, function(err) {
@@ -38,7 +37,7 @@ SearchView = Backbone.View.extend({
       alert('no position found...');
     }
 
-    // _this.toggleGeoLoading();
+    _this.toggleGeoLoading();
   },
 
   // resets user location to null in trucks collection
