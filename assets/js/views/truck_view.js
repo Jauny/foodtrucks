@@ -8,12 +8,13 @@ TruckView = Backbone.View.extend({
     'click': 'showPins'
   },
 
-  showPins: function(){
+  // show truck's infowindow on map
+  showPins: function() {
     this.collection.trigger('closePins');
     this.model.trigger('showPins');
   },
 
-  render: function(query){
+  render: function() {
     this.$el.html(this.template(this.model));
     return this;
   }

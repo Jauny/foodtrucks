@@ -31,6 +31,7 @@ PinView = Backbone.View.extend({
     this.listenTo(this.model, 'showPins', this.showPin);
   },
 
+  // shows the marker's infowindow
   showPin: function() {
     this.infowindow.open(this.options.map, this.marker);
   }

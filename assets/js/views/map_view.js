@@ -41,6 +41,7 @@ MapView = Backbone.View.extend({
     return this;
   },
 
+  // renders the filtered list when user makes a search
   renderFiltered: function() {
     _.each(this.pinViews, function(pin) {
       pin.marker.setMap(null);
@@ -51,16 +52,7 @@ MapView = Backbone.View.extend({
     return this;
   },
 
-  renderCloseByTrucks: function() {
-    _.each(this.pinViews, function(pin) {
-      pin.marker.setMap(null);
-      pin.remove();
-    });
-    this.collection.closeByTrucks.forEach(this.addOne, this);
-
-    return this;
-  },
-
+  // closes pin's infowindow when user clicks another truck/pin
   closePins: function() {
     _.each(this.pinViews, function(pin) {
       pin.infowindow.close();

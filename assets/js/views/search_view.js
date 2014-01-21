@@ -14,6 +14,7 @@ SearchView = Backbone.View.extend({
     this.collection.trigger('filter', query);
   },
 
+  // user navigator to save user's location to trucks collection
   getUserPosition: function() {
     var _this = this;
 
@@ -36,28 +37,9 @@ SearchView = Backbone.View.extend({
     }
   },
 
+  // resets user location to null in trucks collection
   resetUserPosition: function() {
     this.collection.userPosition = null;
     this.searchTrucks();
-  },
-
-  closeByTrucks: function() {
-    var _this = this;
-
-    if (navigator.geolocation) {
-      var positionOptions = {
-        enableHighAccuracy: true,
-        timeout: 10 * 1000 // 10 seconds
-      };
-
-      navigator.geolocation.getCurrentPosition(function(userPosition) {
-        _this.collection.trigger('closeByTrucks', userPosition);
-      }, function(err) {
-        alert("Sorry, we couldn't find any geolocation.");
-      }, positionOptions);
-
-    } else {
-      alert("Sorry, we couldn't find any geolocation.");
-    }
-  },
+  }
 });

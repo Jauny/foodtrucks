@@ -1,3 +1,6 @@
+//= require vendors/jquery
+//= require vendors/underscore
+//= require vendors/backbone
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views
@@ -18,6 +21,7 @@ $(function () {
         collection: this.trucks
       });
 
+      // gets the trucks from /trucks
       this.trucks.fetch({
         reset: true
       });

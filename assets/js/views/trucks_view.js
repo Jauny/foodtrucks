@@ -21,21 +21,14 @@ TrucksView = Backbone.View.extend({
   render: function() {
     this.$el.html('');
     this.collection.forEach(this.addOne, this);
+
     return this;
   },
 
-  // renders the filtered list
+  // renders the filtered list when user makes a search
   renderFiltered: function(query) {
     this.$el.html('');
     this.collection.filteredTrucks.forEach(this.addOne, this);
-
-    return this;
-  },
-
-  // renders from lat long
-  renderCloseByTrucks: function(latlong) {
-    this.$el.html('');
-    this.collection.closeByTrucks.forEach(this.addOne, this);
 
     return this;
   }

@@ -3,7 +3,11 @@ Trucks = Backbone.Collection.extend({
   // holds truck model
   model: Truck,
   url: '/trucks',
+
+  // this allows to keep the original list to reset search
   filteredTrucks: null,
+
+  // keep user geolocation for chaining searches
   userPosition: null,
 
   initialize: function() {
@@ -11,6 +15,7 @@ Trucks = Backbone.Collection.extend({
     this.listenTo(this, 'closeByTrucks', this.closeByTrucks);
   },
 
+  // filters the collection when user does a search
   filter: function(query) {
     var filteredTrucks = _.filter(this.models, function(truck) {
       return (truck.attributes.applicant.toLowerCase().indexOf(query.toLowerCase()) !== -1) ||
@@ -18,6 +23,7 @@ Trucks = Backbone.Collection.extend({
              (truck.attributes.facilitytype.toLowerCase().indexOf(query.toLowerCase()) !== -1);
     });
 
+    // checks if we have user's geolocations and filters
     if (this.userPosition) {
       filteredTrucks = this.closeByTrucks(filteredTrucks);
     }
@@ -26,6 +32,7 @@ Trucks = Backbone.Collection.extend({
     this.trigger('filtered');
   },
 
+  // filters the list for trucks around
   closeByTrucks: function(filteredTrucks) {
     var lat  = this.userPosition.coords.latitude,
         long = this.userPosition.coords.longitude;
@@ -53,8 +60,5 @@ Trucks = Backbone.Collection.extend({
     });
 
     return closeByTrucks;
-
-    // this.closeByTrucks = new Trucks(closeByTrucks);
-    // this.trigger('renderCloseByTrucks');
   }
 });
