@@ -24,3 +24,7 @@ Learnt Backbone through the development of this app. Seemed to be a good front-e
 * filter data based on map position
 * save trucks to favorites
 * paginate / find a smarter way to filter trucks and not have so many on the map
+
+
+#### Attributions for icons
+Cart icon was made by [Jon Trillana](http://thenounproject.com/claxxmoldii/) and the Truck icon by [Nate Eul](http://thenounproject.com/nateeul/) both from The Noun Project, and both with a [Creative Commons](http://creativecommons.org/licenses/by/3.0/us/) license.
