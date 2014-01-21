@@ -19,7 +19,8 @@ Learnt Backbone through the development of this app. Seemed to be a good front-e
 
 ### To do
 * loading screen
-* geolocalisation is too slow
+* geolocalisation is too slow (give a few seconds to the "Find trucks close to me" button to get your geo and then filter. It works, it just takes a few seconds!
 * search trucks around specific address/location
 * filter data based on map position
 * save trucks to favorites
+* paginate / find a smarter way to filter trucks and not have so many on the map
