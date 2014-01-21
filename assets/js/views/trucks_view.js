@@ -6,7 +6,8 @@ TrucksView = Backbone.View.extend({
     // adds the event add to add an element to the collection
     this.listenTo(this.collection, 'add', this.addOne);
     this.listenTo(this.collection, 'reset', this.render);
-    this.listenTo(this.collection, 'filter', this.renderFiltered);
+    this.listenTo(this.collection, 'filtered', this.renderFiltered);
+    this.listenTo(this.collection, 'renderCloseByTrucks', this.renderCloseByTrucks);
   },
 
   addOne: function(model) {
@@ -26,7 +27,16 @@ TrucksView = Backbone.View.extend({
   // renders the filtered list
   renderFiltered: function(query) {
     this.$el.html('');
-    this.collection.filter(query).forEach(this.addOne, this);
+    this.collection.filteredTrucks.forEach(this.addOne, this);
+
+    return this;
+  },
+
+  // renders from lat long
+  renderCloseByTrucks: function(latlong) {
+    this.$el.html('');
+    this.collection.closeByTrucks.forEach(this.addOne, this);
+
     return this;
   }
 });

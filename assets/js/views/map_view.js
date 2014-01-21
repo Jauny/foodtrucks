@@ -7,7 +7,8 @@ MapView = Backbone.View.extend({
     this.listenTo(this.collection, 'add', this.addOne);
     this.listenTo(this.collection, 'reset', this.render);
     this.listenTo(this.collection, 'closePins', this.closePins);
-    this.listenTo(this.collection, 'filter', this.renderFiltered);
+    this.listenTo(this.collection, 'filtered', this.renderFiltered);
+    this.listenTo(this.collection, 'renderCloseByTrucks', this.renderCloseByTrucks);
 
     var mapOptions = {
       center: new google.maps.LatLng(37.7745948, -122.4127949),
@@ -45,7 +46,18 @@ MapView = Backbone.View.extend({
       pin.marker.setMap(null);
       pin.remove();
     });
-    this.collection.filter(query).forEach(this.addOne, this);
+    this.collection.filteredTrucks.forEach(this.addOne, this);
+
+    return this;
+  },
+
+  renderCloseByTrucks: function() {
+    _.each(this.pinViews, function(pin) {
+      pin.marker.setMap(null);
+      pin.remove();
+    });
+    this.collection.closeByTrucks.forEach(this.addOne, this);
+
     return this;
   },
 
