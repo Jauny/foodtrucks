@@ -27,6 +27,7 @@ SearchView = Backbone.View.extend({
 
       navigator.geolocation.getCurrentPosition(
         function(position) {
+          _this.toggleGeoLoading();
           _this.collection.userPosition = position;
           _this.searchTrucks();
       }, function(err) {
