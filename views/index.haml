@@ -6,7 +6,9 @@
           %input(type="search" class="form-control" id="truck-search" placeholder="Search a Food Truck!")
         .row
           .col-xs-7
-            %button(id="find-trucks-close" class="btn btn-primary btn-lg btn-block") Find trucks close to me
+            %button(id="find-trucks-close" class="btn btn-primary btn-lg btn-block")
+              %span#geotext Find trucks close to me
+              %span.glyphicon.glyphicon-cog#geoloading
           .col-xs-5
             %button(id="reset-trucks-close" class="btn btn-danger btn-lg btn-block") Reset my location
       #trucks

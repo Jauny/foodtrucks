@@ -1,6 +1,8 @@
 //= require vendors/jquery
 //= require vendors/underscore
 //= require vendors/backbone
+
+//= require loader
 //= require_tree ./models
 //= require_tree ./collections
 //= require_tree ./views
