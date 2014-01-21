@@ -18,7 +18,7 @@ Therefore, Sinatra seems to be a correct choice for it. Easy, simple, light, it'
 Learnt Backbone through the development of this app. Seemed to be a good front-end framework to allow a responsive and dynamic single page app, with trucks list and the map sharing the same models/collections.
 
 ### To do
-* loading screen
+* ~~loading screen~~
 * geolocalisation is too slow (give a few seconds to the "Find trucks close to me" button to get your geo and then filter. It works, it just takes a few seconds!
 * search trucks around specific address/location
 * filter data based on map position
