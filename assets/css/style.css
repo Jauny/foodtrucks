@@ -6,6 +6,18 @@
   padding: 0;
 }
 
+#search .row {
+  margin: 0;
+}
+
+#search .col-xs-5, .col-xs-7 {
+  padding: 0;
+}
+
+#search button {
+  border-radius: 0;
+}
+
 #search input {
   border-radius: 0;
   height: 60px;

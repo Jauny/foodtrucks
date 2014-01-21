@@ -2,8 +2,13 @@
   .sidebar.col-xs-4
     #trucks-list.list-group
       #search
-        %input(type="search" class="form-control" id="truck-search" placeholder="Search a Food Truck!")
-        %button(id="find-trucks-close" class="btn btn-primary btn-lg btn-block") Find  trucks close by
+        .row
+          %input(type="search" class="form-control" id="truck-search" placeholder="Search a Food Truck!")
+        .row
+          .col-xs-7
+            %button(id="find-trucks-close" class="btn btn-primary btn-lg btn-block") Find trucks close to me
+          .col-xs-5
+            %button(id="reset-trucks-close" class="btn btn-danger btn-lg btn-block") Reset my location
       #trucks
 
     #map.col-xs-8
@@ -11,5 +16,5 @@
 
 
 
--# template for Truck
-= haml :_truck_item_template
+  -# template for Truck
+  = haml :_truck_item_template
